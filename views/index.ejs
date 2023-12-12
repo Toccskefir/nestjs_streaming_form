@@ -18,7 +18,13 @@
             <th>Hossza(mp)</th>
         </thead>
         <tbody>
-
+            <% index.forEach( item => { %>
+                <tr>
+                    <td><%= item.artist %></td>
+                    <td><%= item.title %></td>
+                    <td><%= item.length %> mp</td>
+                </tr>
+            <% }); %>
         </tbody>
     </table>
 </body>

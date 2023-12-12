@@ -18,8 +18,9 @@ export class AppController {
 
   @Get()
   @Render('index')
-  index() {
-    return { title: 'Kezdőoldal' };
+  async index() {
+    const [data] = await conn.execute('SELECT id, title, artist, length FROM musics ORDER BY artist, title');
+    return { title: 'Kezdőoldal', index: data };
   }
 
   @Get('/form')
