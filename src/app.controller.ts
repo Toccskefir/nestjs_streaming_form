@@ -20,4 +20,10 @@ export class AppController {
   index() {
     return { message: 'Kezdőoldal' };
   }
+
+  @Get('/form')
+  @Render('form')
+  form() {
+    return { title: 'Zene hozzáadása' };
+  }
 }
