@@ -6,30 +6,31 @@
     <title><%= title %></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src='main.js'></script>
 </head>
 <body>
-    <h1>Új szám hozzáadása</h1>
-    <form method="post">
-        <label>
+    <h1 class="text-center">Új szám hozzáadása</h1>
+    <form method="post" class="form-group">
+        <label class="p-2">
             Előadó:
-            <input type="text" name="artist">
+            <input type="text" name="artist" class="form-control">
         </label><br>
-        <label>
+        <label class="p-2">
             Szám címe:
-            <input type="text" name="title">
+            <input type="text" name="title" class="form-control">
         </label><br>
-        <label>
+        <label class="p-2">
             Hossza(mp):
-            <input type="number" name="length" value="0">
+            <input type="number" name="length" value="0" class="form-control">
         </label><br>
 
         <% errors.forEach(item => { %>
             <p style="color: red;"><%= item %></p>
         <% }); %>
 
-        <input type="submit" value="Hozzáad">
-        <a href="/">Mégse</a>
+        <input type="submit" value="Hozzáad" class="btn btn-primary m-2">
+        <a href="/" class="btn btn-primary m-2">Mégse</a>
     </form>
 </body>
 </html>
