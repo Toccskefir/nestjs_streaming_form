@@ -18,7 +18,7 @@ export class AppController {
   @Get()
   @Render('index')
   index() {
-    return { message: 'Kezdőoldal' };
+    return { title: 'Kezdőoldal' };
   }
 
   @Get('/form')
