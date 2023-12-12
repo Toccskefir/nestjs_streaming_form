@@ -21,8 +21,13 @@
         </label><br>
         <label>
             Hossza(mp):
-            <input type="number" name="length">
+            <input type="number" name="length" value="0">
         </label><br>
+
+        <% errors.forEach(item => { %>
+            <p style="color: red;"><%= item %></p>
+        <% }); %>
+
         <input type="submit" value="Hozzáad">
     </form>
 </body>

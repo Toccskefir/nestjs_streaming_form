@@ -25,18 +25,18 @@ export class AppController {
   @Get('/form')
   @Render('form')
   form() {
-    return { title: 'Zene hozzáadása' };
+    return { title: 'Zene hozzáadása', errors: [] };
   }
 
   @Post('/form')
   @Render('form')
   async formPost(@Body() newMusic: newMusicDto, @Res() res: Response) {
     const errors: string[] = [];
-    if (newMusic.title.trim() === '') {
-      errors.push('Adja meg a zene címét!');
-    }
     if (newMusic.artist.trim() === '') {
       errors.push('Adja meg az előadó nevét!');
+    }
+    if (newMusic.title.trim() === '') {
+      errors.push('Adja meg a zene címét!');
     }
     if (newMusic.length <= 50 || isNaN(newMusic.length)) {
       errors.push('A zene hossza legalább 50 másodperc kell legyen!');
