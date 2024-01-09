@@ -20,9 +20,21 @@ export class AppController {
 
   @Get()
   @Render('index')
-  async index() {
+  async index(@Session() session: Record<string, any>) {
+    let username = '';
+    if (session.user_id) {
+      const [rows]: any = await conn.execute(
+        'SELECT username FROM users WHERE id = ?',
+        [session.user_id],
+      );
+      username = rows[0].username;
+    } else {
+      username = 'kedves Vendég';
+    }
+
     const [data] = await conn.execute('SELECT id, title, artist, length FROM musics ORDER BY artist, title');
-    return { title: 'Kezdőoldal', index: data };
+
+    return { title: 'Kezdőoldal', index: data, username };
   }
 
   @Get('/form')
