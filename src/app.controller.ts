@@ -53,4 +53,10 @@ export class AppController {
       res.redirect('/');
     }
   }
+
+  @Get('/register')
+  @Render('register')
+  registerForm() {
+    return { title: 'Regisztráció' };
+  }
 }
