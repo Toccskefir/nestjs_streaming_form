@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post, Render, Res, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Redirect, Render, Res, Session } from '@nestjs/common';
 import * as mysql from 'mysql2';
+import * as bcrypt from 'bcrypt';
 import { AppService } from './app.service';
 import { newMusicDto } from './newMusicDto';
+import { newUserDto } from './newUserDto';
 import { Response } from 'express';
 
 const conn = mysql.createPool({
@@ -58,5 +60,16 @@ export class AppController {
   @Render('register')
   registerForm() {
     return { title: 'Regisztráció' };
+  }
+
+  @Post('/register')
+  @Redirect()
+  async register(@Body() newUser: newUserDto) {
+    const username: string = newUser.username;
+    const password: string = await bcrypt.hash(newUser.password, 10);
+    await conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', [username, password]);
+    return {
+      url: '/',
+    };
   }
 }
