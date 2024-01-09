@@ -30,7 +30,13 @@
     </table>
 
     <div class="text-center">
-        <a href="/form" class="btn btn-primary">Új szám hozzáadása</a>
+        <% if (loggedin) { %>
+            <a href="/form" class="btn btn-primary">Új szám hozzáadása</a>
+            <a href="/logout" class="btn btn-primary">Kijelentkezés</a>
+        <% } else { %>
+            <a href="/register" class="btn btn-primary">Regisztráció</a>
+            <a href="/login" class="btn btn-primary">Bejelentkezés</a>
+        <% } %>
     </div>
 </body>
 </html>

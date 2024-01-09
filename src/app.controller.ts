@@ -22,19 +22,21 @@ export class AppController {
   @Render('index')
   async index(@Session() session: Record<string, any>) {
     let username = '';
+    let loggedin = false;
     if (session.user_id) {
       const [rows]: any = await conn.execute(
         'SELECT username FROM users WHERE id = ?',
         [session.user_id],
       );
       username = rows[0].username;
+      loggedin = true;
     } else {
       username = 'kedves Vendég';
     }
 
     const [data] = await conn.execute('SELECT id, title, artist, length FROM musics ORDER BY artist, title');
 
-    return { title: 'Kezdőoldal', index: data, username };
+    return { title: 'Kezdőoldal', index: data, username, loggedin };
   }
 
   @Get('/form')
