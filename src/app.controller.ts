@@ -78,4 +78,22 @@ export class AppController {
   loginForm() {
     return { title: 'Bejelentkezés' };
   }
+
+  @Post('/login')
+  @Redirect()
+  async login(@Body() newUser: newUserDto, @Session() session: Record<string, any>,) {
+    const [rows]: any = await conn.execute(
+      'SELECT id, username, password FROM users WHERE username = ?',
+      [newUser.username],
+    );
+    if (rows.length == 0) {
+      return { url: '/login' };
+    }
+    if (await bcrypt.compare(newUser.password, rows[0].password)) {
+      session.user_id = rows[0].id;
+      return { url: '/' };
+    } else {
+      return { url: '/login' };
+    }
+  }
 }
