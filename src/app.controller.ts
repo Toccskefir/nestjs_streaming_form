@@ -72,4 +72,10 @@ export class AppController {
       url: '/',
     };
   }
+
+  @Get('/login')
+  @Render('login')
+  loginForm() {
+    return { title: 'Bejelentkezés' };
+  }
 }
