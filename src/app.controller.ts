@@ -108,4 +108,11 @@ export class AppController {
       return { url: '/login' };
     }
   }
+
+  @Get('/logout')
+  @Redirect()
+  logout(@Session() session: Record<string, any>) {
+    session.user_id = null;
+    return { url: '/' };
+  }
 }
